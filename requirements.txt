@@ -1,5 +1,5 @@
---extra-index-url https://download.pytorch.org/whl/cu117
--f https://data.pyg.org/whl/torch-1.13.1+cu117.html
+# --extra-index-url https://download.pytorch.org/whl/cu117
+# -f https://data.pyg.org/whl/torch-1.13.1+cu117.html
 torch==1.13.1+cu117
 torchvision==0.14.1+cu117
 torchaudio==0.13.1+cu117
@@ -19,3 +19,8 @@ tensorflow~=2.4
 deepchem==2.7.1
 torch-geometric-temporal==0.54.0
 captum==0.6.0
+ipykernel
+numpy
+scipy
+scikit-learn
+jupyter-client

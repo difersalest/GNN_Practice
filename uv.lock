@@ -2,9 +2,15 @@ version = 1
 revision = 3
 requires-python = "==3.8.15"
 resolution-markers = [
-    "platform_machine != 'aarch64' and platform_machine != 'arm64'",
+    "(platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'linux') or (platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and sys_platform == 'win32') or (platform_machine != 'aarch64' and platform_machine != 'arm64' and sys_platform != 'linux' and sys_platform != 'win32')",
+    "platform_machine == 'AMD64' and sys_platform == 'win32'",
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
     "platform_machine == 'aarch64'",
     "platform_machine == 'arm64'",
+]
+required-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+    "platform_machine == 'AMD64' and sys_platform == 'win32'",
 ]
 
 [[package]]
@@ -342,9 +348,12 @@ dependencies = [
     { name = "matplotlib" },
     { name = "networkx" },
     { name = "node2vec" },
+    { name = "numpy" },
     { name = "pandas" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "seaborn" },
+    { name = "smart-open" },
     { name = "tensorflow" },
     { name = "torch" },
     { name = "torch-cluster" },
@@ -355,6 +364,7 @@ dependencies = [
     { name = "torch-spline-conv" },
     { name = "torchaudio" },
     { name = "torchvision" },
+    { name = "wrapt" },
 ]
 
 [package.metadata]
@@ -367,19 +377,24 @@ requires-dist = [
     { name = "matplotlib", specifier = "==3.6.3" },
     { name = "networkx", specifier = "==2.8.8" },
     { name = "node2vec", specifier = "==0.4.6" },
+    { name = "numpy" },
     { name = "pandas" },
+    { name = "scikit-learn" },
     { name = "scikit-learn", specifier = "==1.2.0" },
+    { name = "scipy" },
     { name = "seaborn", specifier = "==0.12.2" },
-    { name = "tensorflow", specifier = "==2.10.1" },
-    { name = "torch", specifier = "==1.13.1+cu117" },
-    { name = "torch-cluster", specifier = "==1.6.0+pt113cu117" },
+    { name = "smart-open" },
+    { name = "tensorflow", specifier = ">=2.13.1" },
+    { name = "torch", specifier = "==1.13.1+cu117", index = "https://download.pytorch.org/whl/cu117" },
+    { name = "torch-cluster", specifier = "==1.6.0+pt113cu117", index = "https://data.pyg.org/whl/torch-1.13.1+cu117.html" },
     { name = "torch-geometric", specifier = "==2.2.0" },
     { name = "torch-geometric-temporal", specifier = "==0.54.0" },
-    { name = "torch-scatter", specifier = "==2.1.0+pt113cu117" },
-    { name = "torch-sparse", specifier = "==0.6.16+pt113cu117" },
-    { name = "torch-spline-conv", specifier = "==1.2.1+pt113cu117" },
-    { name = "torchaudio", specifier = "==0.13.1+cu117" },
-    { name = "torchvision", specifier = "==0.14.1+cu117" },
+    { name = "torch-scatter", specifier = "==2.1.0+pt113cu117", index = "https://data.pyg.org/whl/torch-1.13.1+cu117.html" },
+    { name = "torch-sparse", specifier = "==0.6.16+pt113cu117", index = "https://data.pyg.org/whl/torch-1.13.1+cu117.html" },
+    { name = "torch-spline-conv", specifier = "==1.2.1+pt113cu117", index = "https://data.pyg.org/whl/torch-1.13.1+cu117.html" },
+    { name = "torchaudio", specifier = "==0.13.1+cu117", index = "https://download.pytorch.org/whl/cu117" },
+    { name = "torchvision", specifier = "==0.14.1+cu117", index = "https://download.pytorch.org/whl/cu117" },
+    { name = "wrapt" },
 ]
 
 [[package]]
@@ -398,15 +413,15 @@ wheels = [
 
 [[package]]
 name = "google-auth-oauthlib"
-version = "0.4.6"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "google-auth" },
     { name = "requests-oauthlib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/30/21/b84fa7ef834d4b126faad13da6e582c8f888e196326b9d6aab1ae303df4f/google-auth-oauthlib-0.4.6.tar.gz", hash = "sha256:a90a072f6993f2c327067bf65270046384cda5a8ecb20b94ea9a687f1f233a7a", size = 19516, upload-time = "2021-09-01T09:54:17.701Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e3/b4/ef2170c5f6aa5bc2461bab959a84e56d2819ce26662b50038d2d0602223e/google-auth-oauthlib-1.0.0.tar.gz", hash = "sha256:e375064964820b47221a7e1b7ee1fd77051b6323c3f9e3e19785f78ab67ecfc5", size = 20530, upload-time = "2023-02-07T20:53:20.679Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b1/0e/0636cc1448a7abc444fb1b3a63655e294e0d2d49092dc3de05241be6d43c/google_auth_oauthlib-0.4.6-py2.py3-none-any.whl", hash = "sha256:3f2a6e802eebbb6fb736a370fbf3b055edcb6b52878bf2f26330b5e041316c73", size = 18306, upload-time = "2021-09-01T09:54:15.745Z" },
+    { url = "https://files.pythonhosted.org/packages/4a/07/8d9a8186e6768b55dfffeb57c719bc03770cf8a970a074616ae6f9e26a57/google_auth_oauthlib-1.0.0-py2.py3-none-any.whl", hash = "sha256:95880ca704928c300f48194d1770cf5b1462835b6e49db61445a520f793fd5fb", size = 18926, upload-time = "2023-02-07T20:53:18.837Z" },
 ]
 
 [[package]]
@@ -588,23 +603,11 @@ wheels = [
 
 [[package]]
 name = "keras"
-version = "2.10.0"
+version = "2.13.1"
 source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/5c/7d/eeada110623f0f40289dcbd771a63ffa42da4d88ad424a8553c6100bf051/keras-2.13.1.tar.gz", hash = "sha256:5df12cc241a015a11b65ddb452c0eeb2744fce21d9b54ba48db87492568ccc68", size = 1245391, upload-time = "2023-06-27T23:05:30.622Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f9/4d/dc255a437c9616b155e5bd55e325e092b7cdcb4652361d733ae051d40853/keras-2.10.0-py2.py3-none-any.whl", hash = "sha256:26a6e2c2522e7468ddea22710a99b3290493768fc08a39e75d1173a0e3452fdf", size = 1684294, upload-time = "2022-09-02T21:28:37.349Z" },
-]
-
-[[package]]
-name = "keras-preprocessing"
-version = "1.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "numpy" },
-    { name = "six" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/5e/f1/b44337faca48874333769a29398fe4666686733c8880aa160b9fd5dfe600/Keras_Preprocessing-1.1.2.tar.gz", hash = "sha256:add82567c50c8bc648c14195bf544a5ce7c1f76761536956c3d2978970179ef3", size = 163598, upload-time = "2020-05-14T03:53:48.526Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/79/4c/7c3275a01e12ef9368a892926ab932b33bb13d55794881e3573482b378a7/Keras_Preprocessing-1.1.2-py2.py3-none-any.whl", hash = "sha256:7b82029b130ff61cc99b55f3bd27427df4838576838c5b2f65940e4fcec99a7b", size = 42581, upload-time = "2020-05-14T03:53:47.192Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/f3/19da7511b45e80216cbbd9467137b2d28919c58ba1ccb971435cb631e470/keras-2.13.1-py3-none-any.whl", hash = "sha256:5ce5f706f779fa7330e63632f327b75ce38144a120376b2ae1917c00fa6136af", size = 1703632, upload-time = "2023-06-27T23:05:28.647Z" },
 ]
 
 [[package]]
@@ -904,16 +907,18 @@ wheels = [
 
 [[package]]
 name = "protobuf"
-version = "3.19.6"
+version = "4.25.8"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/51/d1/79bfd1f481469b661a2eddab551255536401892722189433282bfb13cfb1/protobuf-3.19.6.tar.gz", hash = "sha256:5f5540d57a43042389e87661c6eaa50f47c19c6176e8cf1c4f287aeefeccb5c4", size = 218071, upload-time = "2022-09-29T22:07:23.03Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/df/01/34c8d2b6354906d728703cb9d546a0e534de479e25f1b581e4094c4a85cc/protobuf-4.25.8.tar.gz", hash = "sha256:6135cf8affe1fc6f76cced2641e4ea8d3e59518d1f24ae41ba97bcad82d397cd", size = 380920, upload-time = "2025-05-28T14:22:25.153Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f4/c3/3e7c48cd8e5b0ce9c2e57f38a166cc1b894b9b6a92f28f14a3fa48766ee7/protobuf-3.19.6-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:2b2d2913bcda0e0ec9a784d194bc490f5dc3d9d71d322d070b11a0ade32ff6ba", size = 980365, upload-time = "2022-09-29T21:18:05.178Z" },
-    { url = "https://files.pythonhosted.org/packages/af/53/7e26bb62753910e98243725c2348c5c37914596dd52d53b1d3287662dbe2/protobuf-3.19.6-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:d0b635cefebd7a8a0f92020562dead912f81f401af7e71f16bf9506ff3bdbb38", size = 913911, upload-time = "2022-09-29T21:18:07.1Z" },
-    { url = "https://files.pythonhosted.org/packages/3c/f8/b6d7fd81464553e24a07f9d444126db3beb902b6bff6fcd6524d8284097f/protobuf-3.19.6-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7a552af4dc34793803f4e735aabe97ffc45962dfd3a237bdde242bff5a3de684", size = 1055475, upload-time = "2022-09-29T21:18:09.136Z" },
-    { url = "https://files.pythonhosted.org/packages/ac/dd/b5e3b826322295afd5153fadd2c0ee5ab1ed2ddefa6a7f49f935ca9b51d3/protobuf-3.19.6-cp38-cp38-win32.whl", hash = "sha256:0469bc66160180165e4e29de7f445e57a34ab68f49357392c5b2f54c656ab25e", size = 775927, upload-time = "2022-09-29T21:18:11.567Z" },
-    { url = "https://files.pythonhosted.org/packages/fd/38/cb53f28950a386c8d7e17fc305c97a158cf85d51d7e6caffe4f37336c138/protobuf-3.19.6-cp38-cp38-win_amd64.whl", hash = "sha256:91d5f1e139ff92c37e0ff07f391101df77e55ebb97f46bbc1535298d72019462", size = 896095, upload-time = "2022-09-29T21:18:14.39Z" },
-    { url = "https://files.pythonhosted.org/packages/32/27/1141a8232723dcb10a595cc0ce4321dcbbd5215300bf4acfc142343205bf/protobuf-3.19.6-py2.py3-none-any.whl", hash = "sha256:14082457dc02be946f60b15aad35e9f5c69e738f80ebbc0900a19bc83734a5a4", size = 162648, upload-time = "2022-09-29T22:07:20.303Z" },
+    { url = "https://files.pythonhosted.org/packages/45/ff/05f34305fe6b85bbfbecbc559d423a5985605cad5eda4f47eae9e9c9c5c5/protobuf-4.25.8-cp310-abi3-win32.whl", hash = "sha256:504435d831565f7cfac9f0714440028907f1975e4bed228e58e72ecfff58a1e0", size = 392745, upload-time = "2025-05-28T14:22:10.524Z" },
+    { url = "https://files.pythonhosted.org/packages/08/35/8b8a8405c564caf4ba835b1fdf554da869954712b26d8f2a98c0e434469b/protobuf-4.25.8-cp310-abi3-win_amd64.whl", hash = "sha256:bd551eb1fe1d7e92c1af1d75bdfa572eff1ab0e5bf1736716814cdccdb2360f9", size = 413736, upload-time = "2025-05-28T14:22:13.156Z" },
+    { url = "https://files.pythonhosted.org/packages/28/d7/ab27049a035b258dab43445eb6ec84a26277b16105b277cbe0a7698bdc6c/protobuf-4.25.8-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:ca809b42f4444f144f2115c4c1a747b9a404d590f18f37e9402422033e464e0f", size = 394537, upload-time = "2025-05-28T14:22:14.768Z" },
+    { url = "https://files.pythonhosted.org/packages/bd/6d/a4a198b61808dd3d1ee187082ccc21499bc949d639feb948961b48be9a7e/protobuf-4.25.8-cp37-abi3-manylinux2014_aarch64.whl", hash = "sha256:9ad7ef62d92baf5a8654fbb88dac7fa5594cfa70fd3440488a5ca3bfc6d795a7", size = 294005, upload-time = "2025-05-28T14:22:16.052Z" },
+    { url = "https://files.pythonhosted.org/packages/d6/c6/c9deaa6e789b6fc41b88ccbdfe7a42d2b82663248b715f55aa77fbc00724/protobuf-4.25.8-cp37-abi3-manylinux2014_x86_64.whl", hash = "sha256:83e6e54e93d2b696a92cad6e6efc924f3850f82b52e1563778dfab8b355101b0", size = 294924, upload-time = "2025-05-28T14:22:17.105Z" },
+    { url = "https://files.pythonhosted.org/packages/8e/4c/0d83d568251605510b721e200b1efff05fb7108b9018831900b309b500df/protobuf-4.25.8-cp38-cp38-win32.whl", hash = "sha256:27d498ffd1f21fb81d987a041c32d07857d1d107909f5134ba3350e1ce80a4af", size = 392785, upload-time = "2025-05-28T14:22:18.578Z" },
+    { url = "https://files.pythonhosted.org/packages/f0/06/89b29ac545a799a89ebe888dd29006403aa19b2efb252f8b148b71fc5d9c/protobuf-4.25.8-cp38-cp38-win_amd64.whl", hash = "sha256:d552c53d0415449c8d17ced5c341caba0d89dbf433698e1436c8fa0aae7808a3", size = 413683, upload-time = "2025-05-28T14:22:19.649Z" },
+    { url = "https://files.pythonhosted.org/packages/0c/c1/6aece0ab5209981a70cd186f164c133fdba2f51e124ff92b73de7fd24d78/protobuf-4.25.8-py3-none-any.whl", hash = "sha256:15a0af558aa3b13efef102ae6e4f3efac06f1eea11afb3a57db2901447d9fb59", size = 156757, upload-time = "2025-05-28T14:22:24.135Z" },
 ]
 
 [[package]]
@@ -1247,7 +1252,7 @@ wheels = [
 
 [[package]]
 name = "tensorboard"
-version = "2.10.1"
+version = "2.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "absl-py" },
@@ -1260,35 +1265,26 @@ dependencies = [
     { name = "requests" },
     { name = "setuptools" },
     { name = "tensorboard-data-server" },
-    { name = "tensorboard-plugin-wit" },
     { name = "werkzeug" },
     { name = "wheel" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/80/49/a5ec29886ef823718c8ae54ed0b3ad7e19066b5bf21cec5038427e6a04c4/tensorboard-2.10.1-py3-none-any.whl", hash = "sha256:fb9222c1750e2fa35ef170d998a1e229f626eeced3004494a8849c88c15d8c1c", size = 5873392, upload-time = "2022-09-26T15:15:56.303Z" },
+    { url = "https://files.pythonhosted.org/packages/67/f2/e8be5599634ff063fa2c59b7b51636815909d5140a26df9f02ce5d99b81a/tensorboard-2.13.0-py3-none-any.whl", hash = "sha256:ab69961ebddbddc83f5fa2ff9233572bdad5b883778c35e4fe94bf1798bd8481", size = 5569681, upload-time = "2023-05-04T23:04:00.699Z" },
 ]
 
 [[package]]
 name = "tensorboard-data-server"
-version = "0.6.1"
+version = "0.7.2"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/74/69/5747a957f95e2e1d252ca41476ae40ce79d70d38151d2e494feb7722860c/tensorboard_data_server-0.6.1-py3-none-any.whl", hash = "sha256:809fe9887682d35c1f7d1f54f0f40f98bb1f771b14265b453ca051e2ce58fca7", size = 2350, upload-time = "2021-05-05T21:49:46.023Z" },
-    { url = "https://files.pythonhosted.org/packages/3e/48/dd135dbb3cf16bfb923720163493cab70e7336db4b5f3103d49efa730404/tensorboard_data_server-0.6.1-py3-none-macosx_10_9_x86_64.whl", hash = "sha256:fa8cef9be4fcae2f2363c88176638baf2da19c5ec90addb49b1cde05c95c88ee", size = 3546350, upload-time = "2021-05-05T21:49:49.162Z" },
-    { url = "https://files.pythonhosted.org/packages/60/f9/802efd84988bffd9f644c03b6e66fde8e76c3aa33db4279ddd11c5d61f4b/tensorboard_data_server-0.6.1-py3-none-manylinux2010_x86_64.whl", hash = "sha256:d8237580755e58eff68d1f3abefb5b1e39ae5c8b127cc40920f9c4fb33f4b98a", size = 4910134, upload-time = "2021-05-05T21:49:51.761Z" },
-]
-
-[[package]]
-name = "tensorboard-plugin-wit"
-version = "1.8.1"
-source = { registry = "https://pypi.org/simple" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/68/e8ecfac5dd594b676c23a7f07ea34c197d7d69b3313afdf8ac1b0a9905a2/tensorboard_plugin_wit-1.8.1-py3-none-any.whl", hash = "sha256:ff26bdd583d155aa951ee3b152b3d0cffae8005dc697f72b44a8e8c2a77a8cbe", size = 781327, upload-time = "2022-01-05T20:29:51.358Z" },
+    { url = "https://files.pythonhosted.org/packages/7a/13/e503968fefabd4c6b2650af21e110aa8466fe21432cd7c43a84577a89438/tensorboard_data_server-0.7.2-py3-none-any.whl", hash = "sha256:7e0610d205889588983836ec05dc098e80f97b7e7bbff7e994ebb78f578d0ddb", size = 2356, upload-time = "2023-10-23T21:23:32.16Z" },
+    { url = "https://files.pythonhosted.org/packages/b7/85/dabeaf902892922777492e1d253bb7e1264cadce3cea932f7ff599e53fea/tensorboard_data_server-0.7.2-py3-none-macosx_10_9_x86_64.whl", hash = "sha256:9fe5d24221b29625dbc7328b0436ca7fc1c23de4acf4d272f1180856e32f9f60", size = 4823598, upload-time = "2023-10-23T21:23:33.714Z" },
+    { url = "https://files.pythonhosted.org/packages/73/c6/825dab04195756cf8ff2e12698f22513b3db2f64925bdd41671bfb33aaa5/tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl", hash = "sha256:ef687163c24185ae9754ed5650eb5bc4d84ff257aabdc33f0cc6f74d8ba54530", size = 6590363, upload-time = "2023-10-23T21:23:35.583Z" },
 ]
 
 [[package]]
 name = "tensorflow"
-version = "2.10.1"
+version = "2.13.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "absl-py" },
@@ -1299,7 +1295,6 @@ dependencies = [
     { name = "grpcio" },
     { name = "h5py" },
     { name = "keras" },
-    { name = "keras-preprocessing" },
     { name = "libclang" },
     { name = "numpy" },
     { name = "opt-einsum" },
@@ -1309,30 +1304,60 @@ dependencies = [
     { name = "six" },
     { name = "tensorboard" },
     { name = "tensorflow-estimator" },
-    { name = "tensorflow-io-gcs-filesystem" },
+    { name = "tensorflow-io-gcs-filesystem", version = "0.31.0", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'AMD64' and sys_platform == 'win32'" },
+    { name = "tensorflow-io-gcs-filesystem", version = "0.34.0", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "tensorflow-io-gcs-filesystem", version = "0.35.0", source = { registry = "https://pypi.org/simple" }, marker = "(platform_machine != 'arm64' and sys_platform == 'darwin') or (platform_machine != 'x86_64' and sys_platform == 'linux') or (platform_machine != 'AMD64' and sys_platform == 'win32') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')" },
     { name = "termcolor" },
     { name = "typing-extensions" },
     { name = "wrapt" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/46/acb0b78783d3409b07f9ffee184c50d8e5f50fd8be8d5025c1a9ac4e863e/tensorflow-2.10.1-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:f1c11fad08aa24f4838caf0aa1fba694bfaa323168d3e42e58387f5239943b56", size = 241202619, upload-time = "2022-11-16T20:04:19.762Z" },
-    { url = "https://files.pythonhosted.org/packages/86/58/c30692fdb3036de2b368a78f12bc9b265b305ec29f2da994e2b6fc7b2047/tensorflow-2.10.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b7603cef40bee34cebdfbf264f9ce14c25529356f581f6fb5605f567efd92e07", size = 1933, upload-time = "2022-11-16T20:21:35.771Z" },
-    { url = "https://files.pythonhosted.org/packages/18/8b/35d0eacfc3eb6ef2dec2f76a9011431401d6f95be5ef11b4d1c4c6ba8b27/tensorflow-2.10.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8ee057aa57957b1a689c181bd406c30cbe152b7893c484fe6a26fcce6750f665", size = 578132499, upload-time = "2022-11-16T20:08:22.983Z" },
-    { url = "https://files.pythonhosted.org/packages/b8/61/aa5a61279876f14e970b5639824cb05b22a4802c2f154d28baf64e79c140/tensorflow-2.10.1-cp38-cp38-win_amd64.whl", hash = "sha256:5ef5e562e6baa9dc9f58db324668e7991caec546dfd5ed50647c734cd0d2daab", size = 455913758, upload-time = "2022-11-16T20:16:06.388Z" },
+    { url = "https://files.pythonhosted.org/packages/57/cd/8c88b3b244de3acf379c5428da90e76b9a9eb25a4154fe949da34db430c1/tensorflow-2.13.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:56f35d88c419d59ed5e2823f1c69d794c8f28b77f3aed5300e454e7513a6228e", size = 216208507, upload-time = "2023-09-26T20:56:13.359Z" },
+    { url = "https://files.pythonhosted.org/packages/67/5f/6ba8ccef6305f2fff166c8bec73e583072065dcf522dbee5077972d0b799/tensorflow-2.13.1-cp38-cp38-macosx_12_0_arm64.whl", hash = "sha256:89959a3a31f17c3a0099d7e3c48b20a02eb01f3c1dbf96c6cc5fbf84a623e176", size = 1940, upload-time = "2023-09-26T20:58:34.122Z" },
+    { url = "https://files.pythonhosted.org/packages/bd/ed/e09ea0dc006bf00e935d2a64e864d25f7cf87894e64cc4c4cba4aa1d4d6e/tensorflow-2.13.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e42cdf625125c9ef99d29310774617990915cd046125ef5e9624799659a7d3e8", size = 1954, upload-time = "2023-09-26T21:03:14.974Z" },
+    { url = "https://files.pythonhosted.org/packages/c2/20/b15abac0be474f12cf51a104c9dd935b053081b502c103e9e947e8be7b84/tensorflow-2.13.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:deb204fc8c98ceff81f0f776ffb5172e1a6892143c7bfee90a865e9d5e4bbee2", size = 479637712, upload-time = "2023-09-26T20:59:05.426Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/59/3eb58629e3749d9f4fc1e522487af369f9bd4c451f465d3054961fab6bf8/tensorflow-2.13.1-cp38-cp38-win_amd64.whl", hash = "sha256:46024ba77aaf5c0b578aadf0c75320e539e135ddfe731a1ee241b039c332e565", size = 1932, upload-time = "2023-09-26T21:02:09.872Z" },
 ]
 
 [[package]]
 name = "tensorflow-estimator"
-version = "2.10.0"
+version = "2.13.0"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b6/05/9d7f3a6c783669cba36a6eb4555d0c73a516eee935dde6176dfb8512f94e/tensorflow_estimator-2.10.0-py2.py3-none-any.whl", hash = "sha256:f324ea17cd57f16e33bf188711d5077e6b2e5f5a12c328d6e01a07b23888edcd", size = 438698, upload-time = "2022-09-02T22:41:53.047Z" },
+    { url = "https://files.pythonhosted.org/packages/72/5c/c318268d96791c6222ad7df1651bbd1b2409139afeb6f468c0f327177016/tensorflow_estimator-2.13.0-py2.py3-none-any.whl", hash = "sha256:6f868284eaa654ae3aa7cacdbef2175d0909df9fcf11374f5166f8bf475952aa", size = 440805, upload-time = "2023-06-27T23:04:56.587Z" },
+]
+
+[[package]]
+name = "tensorflow-io-gcs-filesystem"
+version = "0.31.0"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "platform_machine == 'AMD64' and sys_platform == 'win32'",
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/11/58/84a283d653f7818f6044986e09ad0dafd73389a7a380cae470f29fdc14b9/tensorflow_io_gcs_filesystem-0.31.0-cp38-cp38-win_amd64.whl", hash = "sha256:b4ebb30ad7ce5f3769e3d959ea99bd95d80a44099bcf94da6042f9755ac6e850", size = 1486314, upload-time = "2023-02-25T19:32:00.669Z" },
+]
+
+[[package]]
+name = "tensorflow-io-gcs-filesystem"
+version = "0.34.0"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/f6/0f259f41abaa489f185e16d397d5f5a5973970d4677c7d39456cea6f4453/tensorflow_io_gcs_filesystem-0.34.0-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:027a07553367187f918a99661f63ae0506b91b77a70bee9c7ccaf3920bf7cfe7", size = 2388331, upload-time = "2023-09-08T15:00:19.948Z" },
 ]
 
 [[package]]
 name = "tensorflow-io-gcs-filesystem"
 version = "0.35.0"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "(platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'linux') or (platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and sys_platform == 'win32') or (platform_machine != 'aarch64' and platform_machine != 'arm64' and sys_platform != 'linux' and sys_platform != 'win32')",
+    "platform_machine == 'aarch64'",
+    "platform_machine == 'arm64'",
+]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/aa/4d/c0710d56efa1c40f6279fda397f0c9ec4def869311320c0a9d695808fb2d/tensorflow_io_gcs_filesystem-0.35.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:eb6bf8f5b40207ecb17e7fdc3b4fc824a8361267c14e9528c1688e16de135cb7", size = 2987481, upload-time = "2023-12-19T00:59:09.56Z" },
 ]
