@@ -345,6 +345,7 @@ dependencies = [
     { name = "gensim" },
     { name = "ipykernel" },
     { name = "jupyter-client" },
+    { name = "kagglehub" },
     { name = "matplotlib" },
     { name = "networkx" },
     { name = "node2vec" },
@@ -374,6 +375,7 @@ requires-dist = [
     { name = "gensim", specifier = "==4.3.0" },
     { name = "ipykernel" },
     { name = "jupyter-client" },
+    { name = "kagglehub", specifier = ">=0.2.9" },
     { name = "matplotlib", specifier = "==3.6.3" },
     { name = "networkx", specifier = "==2.8.8" },
     { name = "node2vec", specifier = "==0.4.6" },
@@ -599,6 +601,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/99/1b/72906d554acfeb588332eaaa6f61577705e9ec752ddb486f302dafa292d9/jupyter_core-5.8.1.tar.gz", hash = "sha256:0a5f9706f70e64786b75acba995988915ebd4601c8a52e534a40b51c95f59941", size = 88923, upload-time = "2025-05-27T07:38:16.655Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2f/57/6bffd4b20b88da3800c5d691e0337761576ee688eb01299eae865689d2df/jupyter_core-5.8.1-py3-none-any.whl", hash = "sha256:c28d268fc90fb53f1338ded2eb410704c5449a358406e8a948b75706e24863d0", size = 28880, upload-time = "2025-05-27T07:38:15.137Z" },
+]
+
+[[package]]
+name = "kagglehub"
+version = "0.2.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+    { name = "requests" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3f/9d/a3bbd76a48c8e06cc8c6817549c52148c7bc9d4ead9626cfb3e1093a0786/kagglehub-0.2.9.tar.gz", hash = "sha256:761366c7349910612c9df879fae0a305a2146bf3b3f90e8be8434ab823d53687", size = 55678, upload-time = "2024-07-31T19:04:43.896Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5c/e7/71927b088047132317c14eb513d69c8375ddba3c9029d4154a054f6c8765/kagglehub-0.2.9-py3-none-any.whl", hash = "sha256:4689019c69f52a86130e3b8c02e41ba521d17ac1d2644d8178a9eb32bbc74ea9", size = 39787, upload-time = "2024-07-31T19:04:42.548Z" },
 ]
 
 [[package]]
@@ -850,7 +866,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess" },
+    { name = "ptyprocess", marker = "platform_machine != 'AMD64' or sys_platform != 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload-time = "2023-11-25T09:07:26.339Z" }
 wheels = [

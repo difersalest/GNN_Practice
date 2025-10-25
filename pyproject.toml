@@ -31,6 +31,7 @@ dependencies = [
     "torch-geometric-temporal==0.54.0",
     "captum==0.6.0",
     "tensorflow>=2.13.1",
+    "kagglehub>=0.2.9",
 ]
 #[tool.uv]
 #index-strategy = 'unsafe-best-match'
